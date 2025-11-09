@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //1.get the document, dom tree
+        //window.document
+        //2.get elements from document
+            //1.direct
+            //2.indirect
+        //3.change the document
+            //1. change attribute
+            //2. change style
+            //3. change text
+            //4. add/delete elements
+            function fun1(){
+                //1.get document
+                //2.get element from document from id
+                var ele=document.getElementById("username");
+                console.log(ele);
+
+            }
+
+            function fun2(){
+                var els= document.getElementsByTagName("Input");//return a collection, which can be read by iterator
+                console.log(els);
+                for(var i=0; i<els.length; i++){
+                    console.log(els[i]);
+                }
+            }
+
+            function fun3(){
+                var els=document.getElementsByName("aaa");
+                for(var i in els){
+                    console.log(els[i]);
+                }
+            }
+
+            function fun4(){
+                var els=document.getElementsByClassName("a");
+                for(var i in els){
+                    console.log(els[i]);
+                }
+            }
+            
+            function fun5(){
+                //get parent
+                var div1=document.getElementById("div01");
+                var cs=div1.children;//get all children
+                for(var i=0; i<cs.length; i++){
+                    console.log(cs[i]);
+                }
+
+                console.log(div1.firstElementChild);
+                console.log(div1.lastElementChild);
+
+
+            }
+
+            function fun6(){
+                var pass=document.getElementById("password");
+                console.log(pass.parentElement);//get parents from child
+            }
+
+            function fun7(){
+                var pass=document.getElementById("password");
+                console.log(pass.previousElementSibling);//get sibling from child
+                console.log(pass.nextElementSibling);//get sibling from child
+
+            }
+
+
+    </script>
+</head>
+<body>
+    <div id="div01">
+        <input type="text" class="a" id="username" name="aaa"/>
+        <input type="text" class="b" id="password" name="aaa"/>
+        <input type="text" class="a" id="email"/>
+        <input type="text" class="b" id="address"/>
+        
+    </div>
+    <input type="text"/><br>
+    <input type="button" value="get element from id search button" onclick="fun1()" id="btn01"/> 
+    <input type="button" value="get elements from tag name search button" onclick="f=fun2()" id="btn02"/> 
+    <input type="button" value="get elements by name" onclick="fun3()" id="btn03"/> 
+    <input type="button" value="get eloement by class" onclick="fun4()" id="btn04"/> 
+
+    <hr>
+    <input type="button" value="get element from parent" onclick="fun5()" id="btn05"/> 
+    <input type="button" value="get elements children" onclick="f=fun6()" id="btn06"/> 
+    <input type="button" value="get elements from siblings" onclick="fun7()" id="btn07"/> 
+
+</body>
+</html>

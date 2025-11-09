@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd">
+<!--Spring 为了知道程序员在哪些地方标记了什么注解，就需要通过扫描的方式，来进行检测。然后根据注解进行后续操作。
+
+-->
+    <!--    扫描组件-->
+<!--    推荐写复杂点：com.atguigu.spring.controller, com.atguigu.spring.dao  中间用逗号分割， 扫描时间短些-->
+
+<!--    使用注解时：
+类名首字母小写就是bean的id。例如：UserController类对应的bean的id就是userController。-->
+<!--    可以手动在注解后面设置id-->
+    <context:component-scan base-package="com.atguigu">
+        <!-- context:exclude-filter标签：指定排除规则 -->
+        <!--
+            type：设置排除或包含的依据
+            type="annotation"，根据注解排除，expression中设置要排除的注解的全类名
+            type="assignable"，根据类型排除，expression中设置要排除的类型的全类名
+        -->
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+<!--        不扫描controller-->
+<!--        No qualifying bean of type 'com.atguigu.spring.controller.userController' available-->
+
+        <!--<context:exclude-filter type="assignable"expression="com.atguigu.controller.UserController"/>-->
+<!--        不扫描userController-->
+    </context:component-scan>
+
+
+    <context:component-scan base-package="com.atguigu" use-default-filters="false">
+        <!-- context:include-filter标签：指定在原有扫描规则的基础上追加的规则 -->
+        <!-- use-default-filters属性：取值false表示关闭默认扫描规则 -->
+        <!-- 此时必须设置use-default-filters="true"，因为默认规则即扫描指定包下所有类， 可以使用 exclude-filter-->
+        <!-- 此时必须设置use-default-filters="false"，因为默认规则即扫描指定包下所有类， 可以使用 include-filter-->
+        <!--
+            type：设置排除或包含的依据
+            type="annotation"，根据注解排除，expression中设置要排除的注解的全类名
+            type="assignable"，根据类型排除，expression中设置要排除的类型的全类名
+         -->
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <!--<context:include-filter type="assignable"expression="com.atguigu.controller.UserController"/>-->
+    </context:component-scan>
+
+
+
+
+    <!--  ④@Autowired工作流程 -->
+    <!--    首先根据所需要的组件类型到IOC容器中查找-->
+    <!--    能够找到唯一的bean：直接执行装配-->
+    <!--    如果完全找不到匹配这个类型的bean：装配失败-->
+    <!--    和所需类型匹配的bean不止一个-->
+    <!--    没有@Qualifier注解：根据@Autowired标记位置成员变量的变量名作为bean的id进行匹配-->
+    <!--    能够找到：执行装配-->
+    <!--    找不到：装配失败-->
+    <!--    使用@Qualifier注解：根据@Qualifier注解中指定的名称作为bean的id进行匹配-->
+    <!--    能够找到：执行装配-->
+    <!--    找不到：装配失败-->
+
+</beans>

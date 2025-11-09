@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //正常需要window. 但可以省略
+        function fun1(){
+            window.alert("hello");
+        }
+        function fun3(){
+            var res=window.prompt("hello, enter name");
+            console.log(res);
+        }
+        function fun2(){
+           var res= window.confirm("fonfirm?");
+           console.log(res);
+
+        }
+        function fun4(){
+            window.setTimeout(function(){console.log("hello")},2000);
+
+        }
+
+        //history: 访问历史
+        function funA(){
+            history.back();
+        }
+        function  funB(){
+            history.forward();
+        }
+
+        //location
+        function fun(){
+            location.href="https://www.w3schools.com/html/html_id.asp";
+        }
+
+
+        //sessionStorage 存储暂时数据（浏览器关了就没了）
+        //localStorage 永久数据
+
+        function funS(){
+            //向session中存储数据
+            sessionStorage.setItem("keya","valuea");
+            //向local中存储数据
+            localStorage.setItem("keyb","valueb");
+
+        }
+        function funR(){
+            console.log(sessionStorage.getItem("keya"));
+            console.log(localStorage.getItem("keyb"));
+
+        }
+        function funC(){
+            sessionStorage.removeItem("keya");
+            localStorage.removeItem("keyb");
+
+        }
+
+    </script>
+</head>
+<body>
+    <button onclick="fun1()">alert button</button>
+    <button onclick="fun2()">confirm button</button>
+    <button onclick="fun3()">prompt button</button>
+    <button onclick="fun4()">print hello after 2 sec</button>
+
+    <a href="https://www.w3schools.com/html/html_id.asp">html</a>
+    <hr>
+    <button onclick="funA()">last page</button>
+    <button onclick="funB()">next page</button>
+
+    <hr>
+    <button onclick="fun()">html</button>
+    <hr>
+    <button onclick="funS()">save data</button>
+    <button onclick="funR()">read data</button>
+    <button onclick="funC()">clear data</button>
+
+   
+
+
+</body>
+</html>

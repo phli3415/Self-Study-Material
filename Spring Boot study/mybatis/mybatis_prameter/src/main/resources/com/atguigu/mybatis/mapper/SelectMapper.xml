@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.atguigu.mybatis.mapper.SelectMapper">
+
+
+<!-- 尽量用list去存储-->
+    <select id="getUserById"  resultType="com.atguigu.mybatis.pojo.user">
+        select * from t_user where id=#{id}
+    </select>
+
+    <select id="getUserList" resultType="com.atguigu.mybatis.pojo.user">
+        select* from t_user
+    </select>
+
+
+    <!--  /**
+ 查询用户的总记录数
+ @return
+ 在MyBatis中，对于Java中常用的类型都设置了类型别名
+ 例如： java.lang.Integer->int|integer
+     例如： int->_int|_integer
+     例如： Map->map,List->list
+
+  -->
+
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(*) from t_user
+    </select>
+<!--    直接调Integer, 直接写int 或 Integer 也行-->
+
+
+<!--    Map<String, Object> getUserByIdToMap(@Param("id") Integer id);
+-->
+    <select id="getUserByIdToMap" resultType="map">
+        select * from t_user where id=#{id}
+    </select>
+
+<!--        Map<String, Object> getAllToMap();-->
+
+    <select id="getAllToMap" resultType="map">
+        select * from t_user
+    </select>
+
+<!--    select * from t_user where username like '%a%'-->
+<!--    名字中有a-->
+<!--    List<user> getUserByLike(@Param("mohu") String mohu);-->
+    <select id="getUserByLike" resultType="com.atguigu.mybatis.pojo.user">
+--         select * from t_user where username like '%${mohu}%'
+        select * from t_user where username like "%"#{mohu}"%"
+    </select>
+<!--    应为在字符串里， 不能用#，要$-->
+<!--    或第二种-->
+
+
+    <delete id="deleteUserById">
+        delete from t_user where id in(${id})
+    </delete>
+<!--    要用$, 应为$不带单引号-->
+
+    <select id="getUserListByTable" resultType="com.atguigu.mybatis.pojo.user">
+        select * from ${table}
+    </select>
+
+    <!--int insertUser(User user);-->
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user values(null,#{username},#{password},#{age},#{sex})
+    </insert>
+
+
+
+
+
+</mapper>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // var month=prompt("enter a number");//this method return a string
+        // console.log(typeof(month));
+        // var month=Number.parseInt(month);
+        // console.log(typeof(month));
+
+        // console.log(month);
+
+        //非空字符串，非零数字，非空对象，自动转成true
+
+        var month=prompt("enter a number");//this method return a string
+        var month=Number.parseInt(month);
+
+        switch(month){ //no auto cast, you need to cast to int first 
+            case 3:
+            case 4:
+            case 5:
+                console.log("spring");
+                break;
+            case 6:
+            case 7:
+            case 8:
+                console.log("summer");
+                break;
+
+            default:
+                console.log("error");
+
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

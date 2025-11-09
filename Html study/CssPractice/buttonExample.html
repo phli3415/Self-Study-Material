@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        /* 内嵌： 元素选择器， 通过标签名确定样式 */
+        /* input{
+            width:100px; 
+            height:80px; 
+            background-color: coral; 
+            color:yellowgreen ;
+            font-size: 20px; 
+            font-family: 'Courier New', Courier, monospace;
+            border: 3px solid green;
+            border-radius: 5px;
+        } */
+
+    </style>
+    <link href="button.css" rel="stylesheet">
+
+</head>
+<body> 
+    <!-- 引入方法1 行列式：
+     优点：直观
+     缺点：代码复用率低，影响大小，运行 -->
+
+    <!-- <input type="button" value="button"
+        style=" width:100px; height:80px; background-color: coral; color:aliceblue ;font-size: 20px; 
+        font-family: 'Courier New', Courier, monospace;
+        border: 3px solid green;
+        border-radius: 5px;"> -->
+
+    <!--方式2 内嵌
+        在head中定义公共样式
+        需要选择器
+    -->
+        <!-- 方式三： 外部引用
+        单独创一个css文件，在HTML中引用 
+        -->
+    <input type="button" value="button">    
+
+</body>
+</html>

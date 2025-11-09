@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      function addE(){
+        //创建子元素
+        var li= document.createElement("li");
+
+        //设定文本
+        li.id="e";
+        li.innerText="e";
+
+        //加进去
+        var list= document.getElementById("city");
+        list.appendChild(li);
+
+
+      }
+
+      function addEBefore(){
+        //创建子元素
+        var li= document.createElement("li");
+
+        //设定文本
+        li.id="e";
+        li.innerText="e";
+
+        //加进去
+        var list= document.getElementById("city");
+        list.insertBefore(li,document.getElementById("b"));
+      }
+
+      function replaceE(){
+        //创建子元素
+        var li= document.createElement("li");
+
+        //设定文本
+        li.id="e";
+        li.innerText="e";
+
+        //加进去
+        var list= document.getElementById("city");
+        list.replaceChild(li,document.getElementById("b"));
+      }
+
+      function deleteD(){
+       
+        var li= document.getElementById("d");
+        li.remove();
+      }
+
+      function clearCity(){
+       
+       var li= document.getElementById("city");
+       var it=li.firstChild;
+       while(it !=null){
+        it.remove();
+        it=li.firstChild;
+       }
+     }
+        
+    </script>
+    <style>
+        #in1{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <ul id="city">
+        <li id="a">a</li>
+        <li id="b">b</li>
+        <li id="c">c</li>
+        <li id="d">d</li>
+
+    </ul>
+
+
+    <hr>
+    <!-- tesk1: add another item e at the end of the list -->
+    <button onclick="addE()">add e</button>
+
+    <!-- tesk2: add another item e before b -->
+    <button onclick="addEBefore()">add befopre e</button>
+
+    <button onclick="replaceE()">replace e</button>
+
+
+    <button onclick="deleteD()">delete d</button>
+
+    <!-- clear the list -->
+    <button onclick="clearCity()">clear</button>
+
+    
+</body>
+</html>

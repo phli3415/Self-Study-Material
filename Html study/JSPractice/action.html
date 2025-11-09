@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function fun1(){
+            console.log("pressed");
+        }
+        function fun2(){
+            console.log("pressed2");
+        }
+        function fun3(){
+            alert("pressed3");
+        }
+        //事件绑定方法
+        //1.通过元素绑定 on***
+        //2.dom绑定
+        //一个事件可以绑定多个函数
+        //
+            //1.鼠标事件
+            //2.键盘事件 onkeydown onkeyup
+            //3.表单事件
+            //4.页面加载事件 onload
+
+        
+
+    </script>
+</head>
+<body>
+    <input 
+        type="button"
+        value="button"
+        onclick="fun1(),fun2()"
+        ondblclick="fun3()">
+    <br>
+    <!-- <img scr="XXXXXX" onmouseover="" onmousemove=""> -->
+    <!-- img also work -->
+     <br>
+     <!-- <input type="text" onkeydown="" onkeypress=""> -->
+</body>
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns = "https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation = "https://jakarta.ee/xml/ns/jakartaee
+         https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version = "5.0"
+         metadata-complete = "false">
+
+
+    <!-- 配置SpringMVC的前端控制器，对浏览器发送的请求统一进行处理 -->
+    <servlet>
+        <servlet-name>SpringMVC</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>  <!--        springMVC默认的名字和位置：
+            位置：WEB-INF下
+            名字：<servlet-name>-servlet.xml 当前配置下为SpringMVC-servlet.xml-->
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SpringMVC</servlet-name>
+<!--
+    设置springMVC的核心控制器所能处理的请求的请求路径
+    /所匹配的请求可以是/login或.html或.js或.css方式的请求路径
+    但是/不能匹配.jsp请求路径的请求
+    tomcat有专门的JSPservlet处理, 普通servlet处理不了
+-->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+</web-app>

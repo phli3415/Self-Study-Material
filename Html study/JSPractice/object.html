@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        //1. new Object()
+        //{variableName:variable1......., name:function(){}}
+
+
+
+        // var person=new Object();
+        // person.name="abc";
+        // //if name doesn't exist, make a new one, else, give it a new value
+        // person.age=17;
+        // person.eat=function(food){
+        //     console.log("a "+this.age+" years old person is eating "+food);
+        // }
+
+        // console.log(person.name);
+        // console.log(person.eat("cake"));
+
+
+        var person={
+            name:"abd",
+            age:18,
+            eat:function(food){
+                console.log("a "+this.age+" years old person is eating "+food);
+
+            }
+        }
+        console.log(person.name);
+        console.log(person.eat("cake"));
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

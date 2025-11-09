@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // document.write("<h1>abcs</h1>");
+        // document.write("<hr>");
+
+        // var i=1;
+        // while(i<=9){
+        //     var j=1;
+        //     while(j<=i){
+        //         document.write(j+"*"+i+"="+(j*i)+"&nbsp;&nbsp;&nbsp;&nbsp");//&nbsp is space, " " doesn't work
+        //         j++;
+        //     }
+        //     i++;
+        //     document.write("<hr>");
+        // }
+
+        // for(var i=1; i<=9; i++){
+        //     for(var j=1; j<=i; j++){
+        //         document.write(j+"*"+i+"="+(j*i)+"&nbsp;&nbsp;&nbsp;&nbsp");//&nbsp is space, " " doesn't work
+        //     }
+        //     document.write("<hr>");
+        // }
+
+        var array=["a","b","c"];
+        document.write("<ul>");
+        for(var index=0; index<array.length; index++){
+            document.write("<li>"+array[index]+"</li>");
+        }
+        document.write("</ul>");
+
+        for (number in array){//number only represent the index not the actual element.
+            document.write(array[number]);
+
+        }
+
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

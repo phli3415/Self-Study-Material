@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //how to make a function: 
+        //1. function functionName (){}
+        //var variableName= function(){}
+        //function(a,b){} (you don't need to write variable type, because every thing is var. You don't need private/ static)
+        //(you don't need return type)
+        function sum(a,b){
+            console.log(arguments)
+            return a+b;
+        }
+
+        var result=sum(10,20);
+        console.log(result);
+
+        //var result=sum(10,20,30,40,50); still work. return 30, only the first two argument will be passed into the function
+
+        //sum(10) will return NaN
+
+
+        function add(getSum){
+            return getSum(20,30);
+        }
+
+        var result=add(sum);
+        console.log(result);
+    
+    </script>
+</head>
+<body>
+    <a href="BOM常见API.html">html</a>
+
+</body>
+</html>

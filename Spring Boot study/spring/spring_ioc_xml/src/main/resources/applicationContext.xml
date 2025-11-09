@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="studentOne" class="com.atguigu.spring.pojo.Student" scope="prototype"></bean>
+<!--    一个bean对应一个对象，所以不能传接口进来-->
+<!--bean默认是单例：用同一个bean创建出来的是同一个实体，.equals  返回true-->
+<!-- 设成prototype后可以有多个不同实体,每次都会获取新对象   -->
+
+
+    <bean id="studentTwo" class="com.atguigu.spring.pojo.Student">
+        <!-- property标签：通过组件类的setXxx()方法给组件对象设置属性 -->
+        <!-- name属性：指定属性名（这个属性名是getXxx()、setXxx()方法定义的，和成员变量无关）-->
+        <!-- value属性：指定属性值 -->
+        <property name="sid" value="1001"></property>
+        <property name="sname" value="aaa"></property>
+        <property name="age" value="24"></property>
+        <property name="gender" value="male"></property>
+    </bean>
+
+    <bean id="studentThree" class="com.atguigu.spring.pojo.Student">
+        <constructor-arg value="bbb"></constructor-arg>
+        <constructor-arg value="1002"></constructor-arg>
+        <constructor-arg value="30"></constructor-arg>
+        <constructor-arg value="female" ></constructor-arg>
+    </bean>
+<!--    有参构造，按顺序输入变量值-->
+<!--    注意：
+constructor-arg标签还有两个属性可以进一步描述构造器参数：
+index属性：指定参数所在位置的索引（从0开始）
+name属性：指定参数名
+用你设的就行，不用setter，getter-->
+
+    <bean id="studentFour" class="com.atguigu.spring.pojo.Student">
+        <property name="sid" value="1001"></property>
+        <property name="sname">
+            <null></null>
+<!--            赋空值-->
+        </property>
+        <property name="age" value="24"></property>
+        <!-- 小于号在XML文档中用来定义标签的开始，不能随便使用 -->
+        <!-- 解决方案一：使用XML实体来代替 -->
+        <!-- 解决方案二：使用CDATA节 -->
+        <!-- CDATA中的C代表Character，是文本、字符的含义，CDATA就表示纯文本数据 -->
+        <!-- XML解析器看到CDATA节就知道这里是纯文本，就不会当作XML标签或属性来解析 -->
+        <!-- 所以CDATA节中写什么符号都随意 -->
+<!--        应为CDATA也是标签，不能直接复值，要用一个value子标签-->
+        <property name="gender">
+            <value><![CDATA[a < b]]></value>
+        </property>
+    </bean>
+
+    <bean id="studentFive" class="com.atguigu.spring.pojo.Student">
+        <property name="sid" value="1005"></property>
+        <property name="sname" value="eeee"></property>
+        <property name="age" value="24"></property>
+        <property name="gender" value="male"></property>
+        <!--    object赋值时要调用另一个bean-->
+        <!-- ref属性：引用IOC容器中某个bean的id，将所对应的bean为属性赋值 -->
+        <!--<property name="clazz" ref="clazzOne"></property>-->
+        <!--内部bean：-->
+        <!--<property name="clazz">
+        <bean id="clazzInner" class="com.atguigu.spring.pojo.Clazz">
+            <property name="cid" value="2222"></property>
+            <property name="cname" value="远大前程班"></property>
+        </bean>
+
+        </property>-->
+
+
+
+    </bean>
+
+    <bean id="clazzOne" class="com.atguigu.spring.pojo.Clazz">
+        <property name="cid" value="1001"></property>
+        <property name="cname" value="clazzA"></property>
+        <property name="students" >
+            <list>
+                <ref bean="studentOne"></ref>
+                <ref bean="studentTwo"></ref>
+                <ref bean="studentThree"></ref>
+            </list>
+        </property>
+    </bean>
+
+    <!--    级联:,clazz要先赋值，不然报空指针-->
+    <!--        <bean id="studentFour" class="com.atguigu.spring.bean.Student">
+        <property name="id" value="1004"></property>
+        <property name="name" value="赵六"></property>
+        <property name="age" value="26"></property>
+        <property name="sex" value="女"></property>-->
+    <!-- 一定先引用某个bean为属性赋值，才可以使用级联方式更新属性 -->
+    <!--<property name="clazz" ref="clazzOne"></property>
+    <property name="clazz.clazzId" value="3333"></property>
+    <property name="clazz.clazzName" value="最强王者班"></property>
+</bean>-->
+
+
+<!--    插入array-->
+    <bean id="studentSix" class="com.atguigu.spring.pojo.Student">
+        <property name="sid" value="1004"></property>
+        <property name="sname" value="赵六"></property>
+        <property name="age" value="26"></property>
+        <property name="gender" value="女"></property>
+        <!-- ref属性：引用IOC容器中某个bean的id，将所对应的bean为属性赋值 -->
+        <property name="clazz" ref="clazzOne"></property>
+        <property name="hobby">
+            <array>
+                <value>抽烟</value>
+                <value>喝酒</value>
+                <value>烫头</value>
+            </array>
+        </property>
+        <property name="teacherMap">
+            <map>
+                <entry key="10086" value-ref="teacherOne"></entry>
+<!--                ref引用object， 别的不用加-ref-->
+            </map>
+        </property>
+    </bean>
+
+    <bean id="teacherOne" class="com.atguigu.spring.pojo.Teacher">
+        <property name="teacherId" value="1"></property>
+        <property name="teacherName" value="JiexuShen"></property>
+    </bean>
+
+
+
+
+<!--    &lt;!&ndash;list集合类型的bean&ndash;&gt;-->
+<!--    <util:list id="students">-->
+<!--        <ref bean="studentOne"></ref>-->
+<!--        <ref bean="studentTwo"></ref>-->
+<!--        <ref bean="studentThree"></ref>-->
+<!--    </util:list>-->
+
+<!--    &lt;!&ndash;map集合类型的bean&ndash;&gt;-->
+    <util:map id="teacherMap">
+        <entry>
+            <key>
+                <value>10010</value>
+            </key>
+            <ref bean="teacherOne"></ref>
+        </entry>
+
+    </util:map>
+
+<!--    设完直接ref引用就行了-->
+<!--    <bean id="clazzTwo" class="com.atguigu.spring.bean.Clazz">-->
+<!--        <property name="clazzId" value="4444"></property>-->
+<!--        <property name="clazzName" value="Javaee0222"></property>-->
+<!--        <property name="students" ref="students"></property>-->
+<!--    </bean>-->
+<!--    <bean id="studentFour" class="com.atguigu.spring.bean.Student">-->
+<!--        <property name="id" value="1004"></property>-->
+<!--        <property name="name" value="赵六"></property>-->
+<!--        <property name="age" value="26"></property>-->
+<!--        <property name="sex" value="女"></property>-->
+<!--        &lt;!&ndash; ref属性：引用IOC容器中某个bean的id，将所对应的bean为属性赋值 &ndash;&gt;-->
+<!--        <property name="clazz" ref="clazzOne"></property>-->
+<!--        <property name="hobbies">-->
+<!--            <array>-->
+<!--                <value>抽烟</value>-->
+<!--                <value>喝酒</value>-->
+<!--                <value>烫头</value>-->
+<!--            </array>-->
+<!--        </property>-->
+<!--        <property name="teacherMap" ref="teacherMap"></property>-->
+<!--    </bean>-->
+
+
+
+
+
+
+<!--    引入p命名空间后，可以通过以下方式为bean的各个属性赋值-->
+   <bean id="student6" class="com.atguigu.spring.pojo.Student"
+      p:sid="1006" p:sname="小明" p:clazz-ref="clazzOne" p:teacherMap-ref="teacherMap"></bean>
+</beans>

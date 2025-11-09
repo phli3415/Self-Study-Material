@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function changeAttribute(){
+            var in1 = document.getElementById("in1");
+            console.log(in1.type);
+            console.log(in1.value);
+            in1.type="button";
+            in1.value="hi";
+        }
+
+        function changeStyle(){
+            var in1 = document.getElementById("in1");
+            in1.style.color="green";
+            in1.style.borderRadius="10px";
+        }
+
+        function changeText(){
+            var in1 = document.getElementById("in1");
+ 
+
+            in1.innerText="hi";
+            console.log(in1.innerText);
+        }
+
+        
+    </script>
+    <style>
+        #in1{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="in1" value="hello">
+    <hr>
+    <button onclick="changeAttribute()">change</button>
+    <button onclick="changeStyle()">change style</button>
+    <button onclick="changeText()">change text</button>
+
+    
+</body>
+</html>

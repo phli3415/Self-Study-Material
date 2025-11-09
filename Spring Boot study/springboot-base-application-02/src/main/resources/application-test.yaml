@@ -1,0 +1,5 @@
+database:
+  host: localhostDev
+  port: 54321
+  username: admin
+  password: password123

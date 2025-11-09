@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.atguigu.mybatis.mapper.EmpMapper">
+
+<!--  getEmpByEmpId(@Param("empId") Integer empId)  -->
+<!--    <select id="getEmpByEmpId" resultType="com.atguigu.mybatis.pojo.Emp">-->
+<!--        select * from t_Emp where emp_id=#{empId}-->
+<!--    </select>-->
+<!--    &#45;&#45;select * from t_Emp where emp_id=#{empId}-->
+<!--    &#45;&#45; //      Emp{empId=null, empName='null', age=20, gender='m'}-->
+<!--    &#45;&#45; //      应为表的字段名和属性名不一致，没有映射关系， 无法查询-->
+<!--    select emp_id empId, emp_name empName, age, gender from t_Emp where emp_id=#{empId}-->
+<!--    &#45;&#45;起别名可以-->
+<!--    或在mybatis-config.xml 中设置一个setting-->
+<!--   字段名user_name，设置了mapUnderscoreToCamelCase，此时字段名就会转换为-->
+<!--    userName-->
+<!--    或设置自定义映射-->
+
+
+
+
+    <!--
+    resultMap：设置自定义映射
+    属性：
+    id：表示自定义映射的唯一标识
+    type：查询的数据要映射的实体类的类型
+    子标签：
+    id：设置主键的映射关系
+    result：设置普通字段的映射关系
+    association：设置多对一的映射关系
+    collection：设置一对多的映射关系
+    属性：
+    property：设置映射关系中实体类中的属性名
+    column：设置映射关系中表中的字段名
+-->
+    <resultMap id="empResultMap" type="com.atguigu.mybatis.pojo.Emp">
+        <id property="empId" column="emp_id"></id>
+        <result property="empName" column="emp_name"></result>
+        <result property="age" column="age"></result>
+        <result property="gender" column="gender"></result>
+    </resultMap>
+    <select id="getEmpByEmpId" resultMap="empResultMap">
+        select * from t_Emp where emp_id=#{empId}
+    </select>
+
+    <!--    select emp_id empId, emp_name empName, age, gender from t_Emp where emp_id=#{empId}-->
+
+<!--    俩表联查-->
+<!--    多对一-->
+<!--    级联方式处理映射关系-->
+
+    <resultMap id="empDeptMap" type="Emp">
+        <id column="emp_id" property="empId"></id>
+        <result column="emp_name" property="empName"></result>
+        <result column="age" property="age"></result>
+        <result column="gender" property="gender"></result>
+        <result column="dept_id" property="dept.deptId"></result>
+        <result column="dept_name" property="dept.deptName"></result>
+    </resultMap>
+    <!--Emp getEmpAndDeptByEid(@Param("eid") int eid);-->
+    <select id="getEmpAndDeptByEmpId" resultMap="empDeptMap">
+        select emp.*,dept.*
+        from t_emp emp left join t_dept dept
+            on emp.dept_id = dept.dept_id where emp.emp_id = #{empId}
+    </select>
+
+<!--  assiciation处理多对一或多对一  -->
+<!--    <resultMap id="empDeptMap" type="Emp">-->
+<!--        <id column="eid" property="eid"></id>-->
+<!--        <result column="ename" property="ename"></result>-->
+<!--        <result column="age" property="age"></result>-->
+<!--        <result column="sex" property="sex"></result>-->
+<!--        <association property="dept" javaType="Dept">-->
+<!--            <id column="did" property="did"></id>-->
+<!--            <result column="dname" property="dname"></result>-->
+<!--        </association>-->
+<!--
+property：需要处理的属性的属性名
+javatype：设置需要处理的属性的类型
+-->
+<!--    </resultMap>-->
+    <!--Emp getEmpAndDeptByEid(@Param("eid") int eid);-->
+    <select id="getEmpAndDeptByEid" resultMap="empDeptMap">
+        select emp.*,dept.* from t_emp emp left join t_dept dept on emp.did =dept.did where emp.eid = #{eid}
+    </select>
+
+
+<!--        Emp getEmpAndDeptByStepOne(@Param("empId") Integer empId);-->
+<!--    先查一张再查第二张-->
+    <resultMap id="empResultMapByStep" type="com.atguigu.mybatis.pojo.Emp">
+        <id property="empId" column="emp_id"></id>
+        <result property="empName" column="emp_name"></result>
+        <result property="age" column="age"></result>
+        <result property="gender" column="gender"></result>
+        <association property="dept"
+                     select="com.atguigu.mybatis.mapper.DeptMapper.getEmpDeptByStepTwo"
+                     column="dept_id" >
+
+        </association>
+        <!--
+        select：设置分步查询，查询某个属性的值的sql的标识（namespace.sqlId）
+        column：将sql以及查询结果中的某个字段设置为分步查询的条件
+        分步查询可以延迟加载,开了后只会加载第一个sql
+	-->
+<!--        分步查询的优点：可以实现延迟加载-->
+
+<!--        但是必须在核心配置文件中设置全局配置信息：-->
+
+<!--        lazyLoadingEnabled：延迟加载的全局开关。当开启时，所有关联对象都会延迟加载-->
+
+<!--        aggressiveLazyLoading：当开启时，任何方法的调用都会加载该对象的所有属性。否则，每个属性会按需加载-->
+
+<!--        此时就可以实现按需加载，获取的数据是什么，就只会执行相应的sql。此时可通过association和-->
+
+<!--        collection中的fetchType属性设置当前的分步查询是否使用延迟加载， fetchType="lazy(延迟加-->
+
+<!--        载)|eager(立即加载)"-->
+    </resultMap>
+    <select id="getEmpAndDeptByStepOne" resultMap="empResultMapByStep">
+        select * from t_emp where emp_id = #{empId}
+    </select>
+
+
+<!--        List<Emp> getDeptAndEmpByStepTwo(@Param("deptId") Integer deptId);-->
+    <select id="getDeptAndEmpByStepTwo" resultType="com.atguigu.mybatis.pojo.Emp">
+        select * from t_emp where dept_id=#{deptId}
+    </select>
+
+
+
+
+
+
+
+
+</mapper>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function teskFocus(){
+            console.log("focus on");
+        }
+        function testBlur(){
+            console.log("focus lost");
+        }
+        function testChange(value){
+            console.log("text changed "+value);
+        }
+        function testChange2(value){
+            console.log("text changed2 "+value);
+        }
+        function testSubmit(){
+            var submitted = confirm("submitted?");//return a boolean
+            //弹窗3种方式：
+            //alert
+            //prompt()   input text
+            //confirm()  confirm window
+
+            //you can stop the form from submitting
+            //
+            if(!submitted){
+                event.preventDefault();//stop default action
+            }
+        }
+    </script>
+</head>
+<body>
+    <form action="引入.html" method="get" onsubmit="testSubmit" onreset="">
+        <!-- when reset is pressed -->
+        username:<input type="text" 
+        name="realName" 
+        onfocus="teskFocus()"
+        onblur="testBlur()"
+        onchange="testChange(this.value)"
+        
+        ><br>
+        <!-- text changed and the focus is lost -->
+
+        loginName:<input type="text" name="loginName" ><br>
+        <input type="submit" value="signIn"><br>
+        <input type="reset" value="clear"><br>
+        <select onchange="testChange2(this.value)">
+            <option value="1">a</option>
+            <option value="2">b</option>
+            <option value="3">c</option>
+
+        </select>
+    </form>
+</body>
+</html>

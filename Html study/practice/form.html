@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+    form 
+        action (where to submit the data) 
+            相对路径
+            绝对路径
+            url
+            
+        method how to submit
+            get (default) 把数据以键值对放在url后提交 
+            （数据不安全）
+            （url长度有上限）
+            （不能提交文件）
+            （效率高一点）
+            url?key=value&key=value
+
+            post 参数不放在url后
+            数据单独打包，用请求体发送
+
+        表单项标签
+        需要定义name属性，用于明确提交参数名
+        还需要value属性，用于明确提交实参（默认值，可以不写）
+            type
+                input       单行文本     
+                password    密码文本
+                submit      提交
+                reset       重置
+                radio       单选框
+                ckecked     默认选择
+                hidden      隐藏
+    -->
+    <form action="08welcome.html"method="get">
+        <!-- 添加表单项 -->
+        <input type="hidden" name="id" value="456" ><br>
+
+        <input type="text" name="pid" value="456" readonly="readonly" ><br>
+        <input type="text" name="did" value="456" disabled ><br>
+
+        username: <input type="text" name="username" value="xiaomin"/><br>
+        password: <input type="password" name="userpsw"/><br>
+        gender: <input type="radio" name="gender" value=1 checked="true">male<br>
+        <input type="radio" name="gender" value=2 >female<br><br>
+
+
+        hobby:<input type="checkbox" name="hobby" value=1 cheched="true">唱<br>
+        <input type="checkbox" name="hobby" value="2">跳<br>
+        <input type="checkbox" name="hobby" value="3">rap<br>
+
+
+        note:
+        <textarea name="intro"style="width: 300px; height: 100px"></textarea><br>
+
+        state:
+        <select name="sta">
+            <option>MA</option>
+            <option>On</option>
+            <option selected>QU</option>
+
+        </select><br>
+        profile:
+        <input type="file"><br>
+        <input type="submit" value="login">
+        <input type="reset" value="clear">
+    </form>
+
+
+</body>
+</html>
