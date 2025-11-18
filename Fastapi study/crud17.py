@@ -33,6 +33,29 @@ async def delete_student(stu_id: int) -> None:
     stu = await Student.get(id=stu_id)
     await stu.delete()
 
+async def get_student(stu_id: int) -> Student:
+    stu = await Student.get(id=stu_id)
+    return stu
+# 多条数据
+
+async def get_students(name: str) -> list[Student]:
+    # 完成匹配
+    # ...
+    stus = await Student.filter(name=name)
+    return stus
+
+async def get_students2(name: str) -> list[Student]:
+    # ...
+    # 模糊查询
+    stus = await Student.filter(name__contains=name)
+    return stus
+
+async def get_students3() -> list[Student]:
+    # ...
+    # 获取所有数据 (Get all data)
+    # ...
+    stus = await Student.all()
+    return stus
 
 
 # 1. 直接测试脚本
@@ -58,9 +81,18 @@ async def main():
     # print(f"创建成功 ID:{stu4.id} Name:{stu4.name} Email:{stu4.email}")
 
 
-    await update_student(stu_id=3, age=36)
-    await update_student(stu_id=1, email="cc@qq.com", age=40)
-    await delete_student(stu_id=9)
+    # await update_student(stu_id=3, age=36)
+    # await update_student(stu_id=1, email="cc@qq.com", age=40)
+    # await delete_student(stu_id=9)
+
+    stu = await get_student(3)
+    print(stu)
+    stus1 = await get_students("刘备")
+    print(stus1)
+    stus2 = await get_students2("曹")
+    print(stus2)
+    stus3 = await get_students3()
+    print(stus3)
 
 
 #This code clearly shows how to handle the result of `create_student` and use f-strings to log the new student's **ID**, **Name**, and **Email**.
