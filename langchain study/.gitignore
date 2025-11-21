@@ -1,0 +1,5 @@
+# 忽略所有 .env 文件
+.env
+
+# 特别指定忽略你在符号链接内的 .env 文件（以防万一）
+langchain study/.env
