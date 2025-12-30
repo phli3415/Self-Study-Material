@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Firebase Auth Token Generator</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+</head>
+<body>
+    <h1>Firebase Auth Token Generator</h1>
+    <div id="auth-container">
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="signIn()">Sign In</button>
+        <button onclick="signUp()">Sign Up</button>
+    </div>
+    <div id="token-container" style="display:none;">
+        <h2>Your Firebase ID Token:</h2>
+        <textarea id="token-textarea" rows="10" cols="50"></textarea>
+    </div>
+
+    <script>
+        // **IMPORTANT:** Replace with your Firebase project's configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyB2mevAnxShpqRe6OwkBrfC9SUNPUkl22Y",
+            authDomain: "scholar-stay-5befc.firebaseapp.com",
+            projectId: "scholar-stay-5befc",
+            storageBucket: "scholar-stay-5befc.firebasestorage.app",
+            messagingSenderId: "686208514104",
+            appId: "1:686208514104:web:59884d551c7ca2cb7c0ecd",
+            measurementId: "G-QRFR8CX3MD"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        function signIn() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    user.getIdToken().then((token) => {
+                        document.getElementById('token-textarea').value = token;
+                        document.getElementById('auth-container').style.display = 'none';
+                        document.getElementById('token-container').style.display = 'block';
+                    });
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert('Sign-in failed: ' + errorMessage);
+                });
+        }
+
+        function signUp() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    alert('Sign-up successful! Please sign in.');
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert('Sign-up failed: ' + errorMessage);
+                });
+        }
+    </script>
+</body>
+</html>

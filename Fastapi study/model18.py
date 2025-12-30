@@ -6,7 +6,7 @@ class Student(models.Model):
     name = fields.CharField(max_length=50)
     profile = fields.OneToOneField(
         "models.StudentProfile", on_delete=fields.CASCADE, related_name="student", null=True
-    )
+    ) 
 
 # ----------------------------------
 # 概念数据表 (Conceptual Data Tables)

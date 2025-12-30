@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from typing import Dict
+from typing import Dict 
 
 app=FastAPI()   
 
@@ -42,4 +42,4 @@ terminal 里面运行 aerich init -t practice15.TORTOISE_ORM# 初始化 Aerich �
 aerich init-db # 创建初始迁移并应用, 创建表结构
 aerich migrate --name "注释" # 创建新的迁移
 aerich upgrade # 应用最新的迁移
-'''
+''' 

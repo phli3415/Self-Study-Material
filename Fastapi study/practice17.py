@@ -44,7 +44,7 @@ async def create():
     return stu
 
 # 生成一个传递请求参数创建学生数据的路由
-@app.post('/create2')
+@app.post('/create2') 
 async def create2(name: str, age: int = None, email: str = None):
     stu = await create_student(name, age, email)
     return stu

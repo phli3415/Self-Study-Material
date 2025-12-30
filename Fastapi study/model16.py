@@ -18,6 +18,6 @@ class User(Model):
 
         #创建索引
         indexes = ['email']
-
+ 
     def __str__(self):
         return self.username
